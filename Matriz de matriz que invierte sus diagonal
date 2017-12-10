@@ -1,0 +1,94 @@
+// invertir las diagonales de una matriz de matrices, solo invertiremos las diagonales de derecha a izquierda
+
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+struct matM
+{
+	int submat [MAX][MAX];
+};
+
+void cargar_matdemat (matM A[MAX][MAX], int orden);
+void invertir (matM A[MAX][MAX], int orden);
+void mostrar (matM A[MAX][MAX], int orden);
+
+void main()
+{
+	matM A[MAX][MAX];
+	int orden;
+
+	cout<<"Ingrese la orden de la matriz externa e interna: ";
+	cin>>orden;
+
+	cargar_matdemat (A,orden);
+	invertir (A,orden);
+	cout<<endl<<"LA MATRIZ INVERTIDA ES"<<endl;
+	mostrar (A,orden);
+
+	getch();
+}
+
+void cargar_matdemat (matM A[MAX][MAX], int orden)
+{
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<orden; k++)
+				for (int l=0; l<orden; l++)
+				{
+					cout<<"A["<<i<<"]["<<j<<"].submat["<<k<<"]["<<l<<"]= ";
+					cin>>A[i][j].submat[k][l];
+				}
+}
+
+
+void invertir (matM A[MAX][MAX], int orden)
+{
+	int vec[MAX], tamvec=0,aux; //almacenaremos los datos en un vector 
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<orden; k++)
+				for (int l=0; l<orden; l++)
+				{
+					if ((i==j) && (k==l))
+					{
+						vec[tamvec]= A[i][j].submat[k][l];
+						tamvec++;
+					}
+				}
+
+	for (int i=0; i<(tamvec/2); i++)
+	{
+		aux=vec[i];
+		vec[i]=vec[tamvec-1-i];
+		vec[tamvec-1-i]=aux;
+	}
+
+	tamvec=0;
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<orden; k++)
+				for (int l=0; l<orden; l++)
+				{
+					if ((i==j) && (k==l))
+					{
+						A[i][j].submat[k][l]=vec[tamvec] ;
+						tamvec++;
+					}
+				}
+}
+
+void mostrar (matM A[MAX][MAX], int orden)
+{
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<orden; k++)
+				for (int l=0; l<orden; l++)
+				{
+					cout<<"A["<<i<<"]["<<j<<"].submat["<<k<<"]["<<l<<"]= "<<A[i][j].submat[k][l]<<endl;
+				}
+}
