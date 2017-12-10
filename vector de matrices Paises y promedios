@@ -1,0 +1,82 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+#define MAX 20 
+
+using namespace std;
+
+struct vecM
+{
+	int submat [MAX][MAX];
+};
+
+void cargar_vecdemat (vecM P[], int n, int fil, int col);
+void cargar_paises (string PAIS[], int n);
+void promedio_mostrar (vecM P[], string PAIS[], int n, int fil, int col);
+
+void main()
+{
+	vecM P[MAX];
+	int n,fil,col;
+	string PAIS[MAX];
+
+	cout<<"Ingrese la cantidad de paises evaluados: ";
+	cin>>n;
+	cout<<"Ingrese las dimensiones:"<<endl;
+	cout<<"Ingrese las filas: ";
+	cin>>fil;
+	cout<<"Ingrese las columnas: ";
+	cin>>col;
+
+	cargar_vecdemat (P, n, fil, col);
+	cargar_paises (PAIS, n);
+	cout<<endl<<" Los promedios de cada pais son: "<<endl;
+    promedio_mostrar (P, PAIS, n, fil, col);
+	
+	getch();
+}
+
+void cargar_vecdemat (vecM P[], int n, int fil, int col)
+{
+	for (int i=0; i<n; i++)
+		for (int j=0; j<fil; j++)
+			for (int k=0; k<col; k++)
+			{
+				cout<<"P["<<i<<"].submat["<<j<<"]["<<k<<"]= ";
+				cin>>P[i].submat[j][k];
+			}
+}
+
+void cargar_paises (string PAIS[], int n)
+{
+	cin.ignore();
+	for (int i=0; i<n; i++)
+	{
+		cout<<"PAIS["<<i<<"]= ";
+		getline (cin,PAIS[i]);
+	}
+
+}
+
+
+void promedio_mostrar (vecM P[], string PAIS[], int n, int fil, int col)
+{
+	int aux, promedio;
+	for (int i=0; i<n; i++)
+	{
+		aux=0;
+		for (int j=0; j<fil; j++)
+		{
+			for (int k=0; k<col; k++)
+				aux=aux+(P[i].submat[j][k]);
+
+		}
+		promedio=aux/(fil*col);
+		cout<<PAIS[i]<<"= "<<promedio<<endl;
+	}
+		
+			
+			
+
+}
