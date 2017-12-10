@@ -1,0 +1,83 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+using namespace std;
+
+struct matV
+{
+	int subvector[MAX];
+};
+
+
+void cargar_matdevec (matV A[MAX][MAX], int orden, int n);
+void burbuja (matV A[MAX][MAX], int orden, int n);
+void mostrar_matdevec (matV A[MAX][MAX], int orden, int n);
+
+void main()
+{
+	matV A[MAX][MAX];
+	int orden,n;
+	do
+	{
+		cout<<"Ingrese la orden de la matriz externa: "; //en este ejercicio me pide que sea una matriz cuadrada
+		cin>>orden;
+	}while ((orden<1) || (orden>MAX)); 
+
+	do
+	{
+		cout<<"Ingrese el tamanho del vector interno: "; 
+		cin>>n;
+	}while ((n<1) || (n>MAX)); 
+
+	cargar_matdevec (A,orden,n);
+	burbuja  (A,orden,n);
+	cout<<endl<<"La matriz ordenada es: "<<endl;
+	mostrar_matdevec  (A,orden,n);
+	getch();
+}
+
+
+void cargar_matdevec (matV A[MAX][MAX], int orden, int n)
+{
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<n; k++)
+			{
+				cout<<"A["<<i<<"]["<<j<<"].subvector["<<k<<"]= ";
+				cin>>A[i][j].subvector[k];
+			}
+	cout<<endl;
+}
+
+
+void burbuja (matV A[MAX][MAX], int orden, int n)
+{
+	int aux;
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<(n-1); k++)
+				for (int l=(k+1); l<n; l++)
+				{
+					if (A[i][j].subvector[k]>A[i][j].subvector[l])
+					{
+						aux=A[i][j].subvector[k];
+						A[i][j].subvector[k]=A[i][j].subvector[l];
+						A[i][j].subvector[l]=aux;
+					}
+				}
+	cout<<endl;
+
+}
+
+
+void mostrar_matdevec (matV A[MAX][MAX], int orden, int n)
+{
+	for (int i=0; i<orden; i++)
+		for (int j=0; j<orden; j++)
+			for (int k=0; k<n; k++)
+			{
+				cout<<"A["<<i<<"]["<<j<<"].subvector["<<k<<"]= "<<A[i][j].subvector[k]<<endl;
+			}
+}
