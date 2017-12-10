@@ -1,0 +1,38 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 20
+
+
+using namespace std;
+//cargaremos una vector de vectores
+
+struct vecV
+{
+	int subvec[MAX];
+	
+};
+
+void cargar_vecdevec (vecV A[MAX], int n1, int n2);
+
+void main()
+{
+	int n1,n2;
+	vecV A[MAX];
+	cout<<"Ingrese el tamanho del vector externo: ";
+	cin>>n1;
+	cout<<"Ingrese el tamanho del vector interno: ";
+	cin>>n2;
+	cargar_vecdevec (A,n1,n2);
+	getch();
+}
+
+void cargar_vecdevec (vecV A[MAX], int n1, int n2)
+{
+	for (int i=0; i<n1; i++)
+		for (int j=0; j<n2; j++)
+		{
+			cout<<"A["<<i<<"].subvec["<<j<<"]= ";
+			cin>>A[i].subvec[j];
+		}
+}
